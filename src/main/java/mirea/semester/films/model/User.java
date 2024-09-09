@@ -1,6 +1,8 @@
 package mirea.semester.films.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor  // Автоматически создает конструктор без аргументов
 @AllArgsConstructor // Автоматически создает конструктор со всеми аргументами
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 
     @Id

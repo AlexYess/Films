@@ -1,5 +1,7 @@
 package mirea.semester.films.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor  // Автоматически создает конструктор без аргументов
 @AllArgsConstructor // Автоматически создает конструктор со всеми аргументами
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie {
     @Id
     @GeneratedValue
@@ -23,7 +26,7 @@ public class Movie {
     private String description;
 
     @Column(nullable = false)
-    private String relese_date;
+    private String release_date;
 
     @Column(nullable = false)
     private int type;
@@ -37,7 +40,12 @@ public class Movie {
     @Column
     private String poster_url;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany
+    @JoinTable(
+            name = "movies_has_actors",
+            joinColumns = @JoinColumn(name = "movies_id"),
+            inverseJoinColumns = @JoinColumn(name = "actors_id")
+    )
     private List<Actor> actors;
 
     @ManyToOne
@@ -46,9 +54,9 @@ public class Movie {
 
     @ManyToMany
     @JoinTable(
-            name = "movie_genres",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id")
+            name = "movies_has_genres",
+            joinColumns = @JoinColumn(name = "movies_id"),
+            inverseJoinColumns = @JoinColumn(name = "genres_id")
     )
     private List<Genre> genres;
 

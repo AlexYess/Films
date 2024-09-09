@@ -1,6 +1,9 @@
 package mirea.semester.films.controller;
 
 
+import mirea.semester.films.dto.ActorDto;
+import mirea.semester.films.dto.MovieDto;
+import mirea.semester.films.facade.ActorFacade;
 import mirea.semester.films.model.Actor;
 import mirea.semester.films.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/actors")
@@ -17,16 +21,18 @@ public class ActorController {
 
     @Autowired
     private ActorService actorService;
+    @Autowired
+    private ActorFacade actorFacade;
 
     @GetMapping
-    public List<Actor> getAllActors() {
-        return actorService.getAllActors();
+    public List<ActorDto> getAllActors() {
+        return actorFacade.getAllActors();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Actor> getActorById(@PathVariable Long id) {
-        Optional<Actor> actor = actorService.getActorById(id);
-        return actor.map(ResponseEntity::ok)
+    public ResponseEntity<ActorDto> getActorById(@PathVariable Long id) {
+        Optional<ActorDto> actorDto = actorFacade.getActorById(id);
+        return actorDto.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
