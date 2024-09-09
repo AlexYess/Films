@@ -1,6 +1,9 @@
 package mirea.semester.films.controller;
 
 
+import mirea.semester.films.dto.GenreDto;
+import mirea.semester.films.facade.GenreFacade;
+import mirea.semester.films.mapper.GenreMapper;
 import mirea.semester.films.model.Genre;
 import mirea.semester.films.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +20,14 @@ public class GenreController {
 
     @Autowired
     private GenreService genreService;
+    @Autowired
+    private GenreMapper genreMapper;
+    @Autowired
+    private GenreFacade genreFacade;
 
     @GetMapping
-    public List<Genre> getAllGenres() {
-        return genreService.getAllGenres();
+    public List<GenreDto> getAllGenres() {
+        return genreFacade.getAllGenres();
     }
 
     @GetMapping("/{id}")
