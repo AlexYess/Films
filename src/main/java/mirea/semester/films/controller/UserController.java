@@ -1,6 +1,8 @@
 package mirea.semester.films.controller;
 
 
+import mirea.semester.films.dto.UserDto;
+import mirea.semester.films.facade.UserFacade;
 import mirea.semester.films.model.User;
 import mirea.semester.films.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +19,17 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserFacade userFacade;
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserDto> getAllUsers() {
+        return userFacade.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        Optional<UserDto> user = userFacade.getUserById(id);
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

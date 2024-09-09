@@ -1,6 +1,7 @@
 package mirea.semester.films.controller;
 
 
+import mirea.semester.films.facade.RatingFacade;
 import mirea.semester.films.model.Rating;
 import mirea.semester.films.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class RatingController {
 
     @Autowired
     private RatingService ratingService;
+    @Autowired
+    private RatingFacade ratingFacade;
 
     @GetMapping
     public List<Rating> getAllRatings() {
@@ -50,5 +53,11 @@ public class RatingController {
     public ResponseEntity<Void> deleteRating(@PathVariable Long id) {
         ratingService.deleteRating(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{movieId}/average-rating")
+    public ResponseEntity<Double> getAverageRating(@PathVariable Long movieId) {
+        Double averageRating = ratingFacade.getAverageRatingByMovieId(movieId);
+        return ResponseEntity.ok(averageRating);
     }
 }
