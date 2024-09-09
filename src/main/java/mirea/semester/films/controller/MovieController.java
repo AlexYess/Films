@@ -1,6 +1,8 @@
 package mirea.semester.films.controller;
 
 
+import mirea.semester.films.dto.MovieDto;
+import mirea.semester.films.facade.MovieFacade;
 import mirea.semester.films.model.Movie;
 import mirea.semester.films.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +19,17 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
+    @Autowired
+    private MovieFacade movieFacade;
 
     @GetMapping
-    public List<Movie> getAllMovies() {
-        return movieService.getAllMovies();
+    public List<MovieDto> getAllMovies() {
+        return movieFacade.getAllMovies();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
-        Optional<Movie> movie = movieService.getMovieById(id);
+    public ResponseEntity<MovieDto> getMovieById(@PathVariable Long id) {
+        Optional<MovieDto> movie = movieFacade.getMovieById(id);
         return movie.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
