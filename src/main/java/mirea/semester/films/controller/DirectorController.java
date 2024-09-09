@@ -1,6 +1,8 @@
 package mirea.semester.films.controller;
 
 
+import mirea.semester.films.dto.DirectorDto;
+import mirea.semester.films.facade.DirectorFacade;
 import mirea.semester.films.model.Director;
 import mirea.semester.films.service.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +20,17 @@ public class DirectorController {
     @Autowired
     private DirectorService directorService;
 
+    @Autowired
+    private DirectorFacade directorFacade;
+
     @GetMapping
-    public List<Director> getAllDirectors() {
-        return directorService.getAllDirectors();
+    public List<DirectorDto> getAllDirectors() {
+        return directorFacade.getAllDirectors();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Director> getDirectorById(@PathVariable Long id) {
-        Optional<Director> director = directorService.getDirectorById(id);
+    public ResponseEntity<DirectorDto> getDirectorById(@PathVariable Long id) {
+        Optional<DirectorDto> director = directorFacade.getDirector(id);
         return director.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
