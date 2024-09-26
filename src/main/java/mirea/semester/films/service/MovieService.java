@@ -15,6 +15,9 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
+    private MovieDescriptionService movieDescriptionService;
+
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
@@ -24,6 +27,10 @@ public class MovieService {
     }
 
     public Movie saveMovie(Movie movie) {
+        if (movie.getDescription() == null)
+        {
+            movie.setDescription(movieDescriptionService.generateDescription(movie.getTitle()));
+        }
         return movieRepository.save(movie);
     }
 

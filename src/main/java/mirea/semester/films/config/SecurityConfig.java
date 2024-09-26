@@ -1,11 +1,13 @@
 package mirea.semester.films.config;
-
+import mirea.semester.films.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -13,30 +15,40 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final CustomUserDetailsService userDetailsService;
+
+    public SecurityConfig(@Lazy CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)  // Отключаем CSRF для примера
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Доступ к маршрутам /admin только для администраторов
-                        .requestMatchers("/user/**").hasRole("USER")    // Доступ к маршрутам /user только для пользователей
-                        .requestMatchers("/api/register", "/login").permitAll()  // Открытые маршруты
-                        .anyRequest().authenticated()  // Все остальные маршруты требуют аутентификации
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/login", "/register").permitAll()  // Разрешить доступ к этим страницам
+                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Доступ к запросам только для администраторов
+                        .anyRequest().authenticated()  // Все остальные запросы требуют аутентификации
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")  // Указываем страницу логина
-                        .defaultSuccessUrl("/", true)  // После успешного логина перенаправляем на домашнюю страницу
+                        .loginPage("/login")  // Указываем свою страницу логина
+                        .defaultSuccessUrl("/home", true)  // Перенаправление на главную после успешного входа
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
+                .logout(logout -> logout.permitAll());
 
         return http.build();
     }
 }
-
-

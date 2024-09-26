@@ -2,7 +2,6 @@ package mirea.semester.films.controller;
 
 
 import mirea.semester.films.dto.ActorDto;
-import mirea.semester.films.dto.MovieDto;
 import mirea.semester.films.facade.ActorFacade;
 import mirea.semester.films.model.Actor;
 import mirea.semester.films.service.ActorService;
@@ -13,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/actors")
+@RequestMapping("/admin/api/actors")
 public class ActorController {
 
     @Autowired

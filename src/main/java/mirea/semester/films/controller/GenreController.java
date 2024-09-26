@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/genres")
+@RequestMapping("/admin/api/genres")
 public class GenreController {
 
     @Autowired

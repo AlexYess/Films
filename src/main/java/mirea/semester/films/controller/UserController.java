@@ -2,8 +2,10 @@ package mirea.semester.films.controller;
 
 
 import mirea.semester.films.dto.UserDto;
+import mirea.semester.films.dto.user.UserDTORequest;
+import mirea.semester.films.dto.user.UserDTOResponse;
 import mirea.semester.films.facade.UserFacade;
-import mirea.semester.films.model.User;
+import mirea.semester.films.mapper.UserMapper;
 import mirea.semester.films.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,13 +16,16 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/admin/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
     @Autowired
     private UserFacade userFacade;
+
+    @Autowired
+    private UserMapper mapper;
 
     @GetMapping
     public List<UserDto> getAllUsers() {
@@ -35,8 +40,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = userService.saveUser(user);
+    public ResponseEntity<UserDTOResponse> createUser(@RequestBody UserDTORequest user) {
+        UserDTOResponse savedUser = userService.saveUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 

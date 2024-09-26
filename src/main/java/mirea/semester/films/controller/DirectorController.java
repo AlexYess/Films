@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/directors")
+@RequestMapping("/admin/api/directors")
 public class DirectorController {
 
     @Autowired

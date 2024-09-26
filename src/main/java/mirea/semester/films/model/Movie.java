@@ -22,10 +22,10 @@ public class Movie {
     @Column(nullable = false)
     private String title;
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "release_date", nullable = false)
     private String release_date;
 
     @Column(nullable = false)

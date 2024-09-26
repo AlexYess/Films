@@ -3,7 +3,6 @@ package mirea.semester.films.mapper;
 import mirea.semester.films.dto.DirectorDto;
 import mirea.semester.films.dto.MovieDto;
 import mirea.semester.films.model.Director;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
