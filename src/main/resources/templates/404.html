@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>404 Not Found</title>
+</head>
+<body>
+<!-- Поисковая строка и выпадающее меню -->
+<form action="/search" method="get">
+    <input type="text" name="query" placeholder="Search...">
+    <select name="type">
+        <option value="movie">Movie</option>
+        <option value="actor">Actor</option>
+        <option value="director">Director</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+<h1>Page Not Found</h1>
+<p>The resource you are looking for could not be found.</p>
+</body>
+</html>

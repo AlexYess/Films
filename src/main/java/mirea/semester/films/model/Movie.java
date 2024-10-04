@@ -48,9 +48,13 @@ public class Movie {
     )
     private List<Actor> actors;
 
-    @ManyToOne
-    @JoinColumn(name = "director_id")
-    private Director director;
+    @ManyToMany
+    @JoinTable(
+            name = "movies_has_directors",
+            joinColumns = @JoinColumn(name = "movies_id"),
+            inverseJoinColumns = @JoinColumn(name = "directors_id")
+    )
+    private List<Director> directors;
 
     @ManyToMany
     @JoinTable(

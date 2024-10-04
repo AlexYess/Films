@@ -30,4 +30,8 @@ public class ActorService {
     public void deleteActor(Long id) {
         actorRepository.deleteById(id);
     }
+
+    public Optional<Actor> getActorByName(String name) {
+        return actorRepository.findByName(name);
+    }
 }

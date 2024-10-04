@@ -4,6 +4,7 @@ import mirea.semester.films.dto.DirectorDto;
 import mirea.semester.films.dto.MovieDto;
 import mirea.semester.films.mapper.DirectorMapper;
 import mirea.semester.films.mapper.MovieMapper;
+import mirea.semester.films.model.Director;
 import mirea.semester.films.service.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,5 +42,9 @@ public class DirectorFacade {
 
     public List<DirectorDto> getAllDirectors() {
         return directorMapper.toDtoList(directorService.getAllDirectors());
+    }
+
+    public Optional<Director> getDirectorByName(String name) {
+        return directorService.getDirectorByName(name);
     }
 }

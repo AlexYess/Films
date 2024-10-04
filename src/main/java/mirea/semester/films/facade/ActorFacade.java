@@ -46,4 +46,8 @@ public class ActorFacade {
         // Преобразуем список актеров в список DTO с помощью ActorMapper
         return actorMapper.toDtoList(actors);
     }
+
+    public Optional<Actor> getActorByName(String name) {
+        return actorService.getActorByName(name);
+    }
 }

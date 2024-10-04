@@ -30,4 +30,8 @@ public class DirectorService {
     public void deleteDirector(Long id) {
         directorRepository.deleteById(id);
     }
+
+    public Optional<Director> getDirectorByName(String name) {
+        return directorRepository.getDirectorsByName(name);
+    }
 }
