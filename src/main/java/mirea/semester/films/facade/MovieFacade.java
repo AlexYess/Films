@@ -60,10 +60,15 @@ public class MovieFacade {
     }
 
     public List<MovieDto> getRandomMovies(int i) {
-        return movieService.getRandomMovies(5);
+        return movieService.getRandomMovies(10);
     }
 
     public Optional<MovieDto> getMovieByTitle(String title) {
         return movieService.getMovieByTitle(title);
+    }
+
+    public Movie createMovie(MovieDto movie) {
+        Movie newMovie = movieMapper.toMovie(movie);
+        return movieService.saveMovie(newMovie);
     }
 }

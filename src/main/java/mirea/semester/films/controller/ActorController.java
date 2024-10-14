@@ -18,8 +18,6 @@ import java.util.Optional;
 public class ActorController {
 
     @Autowired
-    private ActorService actorService;
-    @Autowired
     private ActorFacade actorFacade;
 
     @GetMapping
@@ -35,14 +33,14 @@ public class ActorController {
     }
 
     @PostMapping
-    public ResponseEntity<Actor> createActor(@RequestBody Actor actor) {
-        Actor savedActor = actorService.saveActor(actor);
+    public ResponseEntity<Actor> createActor(@RequestBody ActorDto actor) {
+        Actor savedActor = actorFacade.saveActor(actor);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedActor);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteActor(@PathVariable Long id) {
-        actorService.deleteActor(id);
+        actorFacade.deleteActor(id);
         return ResponseEntity.noContent().build();
     }
 }

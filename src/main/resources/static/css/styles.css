@@ -3,6 +3,10 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Минимальная высота для тела документа */
+    overflow-x: hidden; /* Убираем горизонтальную прокрутку */
 }
 
 header {
@@ -12,6 +16,12 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
+}
+
+main {
+    flex-grow: 1; /* Основной контент заполняет доступное пространство */
+    padding: 20px;
 }
 
 form {
@@ -21,7 +31,7 @@ form {
     gap: 10px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="number"] {
     padding: 10px;
     font-size: 16px;
     width: 300px;
@@ -36,7 +46,7 @@ select, button {
     border: 1px solid #ccc;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
     margin: 20px 0;
 }
@@ -66,11 +76,233 @@ h1 {
     border-radius: 10px;
 }
 
+.content-details p {
+    margin: 10px 0;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
 footer {
     background-color: #f8f9fa;
     padding: 20px;
     text-align: center;
-    position: fixed;
     width: 100%;
-    bottom: 0;
+    margin-top: auto; /* Футер всегда будет внизу */
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Контейнер для постера и информации о фильме */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стиль для постера фильма */
+.content-image img {
+    max-width: 300px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+/* Стиль для информации о фильме */
+.content-details {
+    max-width: 600px;
+}
+
+/* Центрирование контейнера */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;  /* Высота контейнера */
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Стили для формы логина */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Стили кнопки */
+.submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Сообщение об ошибке */
+.error-message {
+    color: red;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+/* Поисковая строка */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-form input, .search-form select, .search-form button {
+    margin: 0 5px;
+}
+
+/* Футер */
+footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #666;
+}
+
+.register-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register-link a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.register-link a:hover {
+    background-color: #0056b3;
+}
+
+/* Стиль для прокручиваемых таблиц */
+.table-container {
+    max-height: 200px;
+    overflow-y: scroll;
+    margin: 20px auto;
+    width: 80%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+table td {
+    background-color: #fff;
+}
+
+/* Обеспечение одинакового размера таблиц */
+.table-container {
+    height: 250px;  /* Устанавливаем одинаковую высоту */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Форма для создания фильма */
+.create-movie-form {
+    display: flex;
+    flex-direction: column; /* Поля располагаются вертикально */
+    align-items: center; /* Выравнивание по центру */
+    width: 100%;
+    max-width: 600px; /* Устанавливаем максимальную ширину формы */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* Цвет фона */
+    border-radius: 10px; /* Скругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+/* Контейнер для всей страницы */
+.content-wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Контейнер заполняет минимум всю высоту экрана */
+}
+
+.main-content {
+    flex-grow: 1; /* Основной контент заполняет доступное пространство */
+}
+
+.dashboard-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Отступы между кнопками */
+    margin-top: 20px;
+}
+
+.dashboard-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-button:hover {
+    background-color: #0056b3;
+}
+
+.dashboard-button:active {
+    background-color: #003f7f;
 }

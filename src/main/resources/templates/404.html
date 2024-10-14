@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>404 Not Found</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<!-- Поисковая строка и выпадающее меню -->
-<form action="/search" method="get">
-    <input type="text" name="query" placeholder="Search...">
-    <select name="type">
-        <option value="movie">Movie</option>
-        <option value="actor">Actor</option>
-        <option value="director">Director</option>
-    </select>
-    <button type="submit">Search</button>
-</form>
-<h1>Page Not Found</h1>
-<p>The resource you are looking for could not be found.</p>
+<header>
+    <!-- Поисковая строка -->
+    <form action="/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search..." required>
+        <select name="type">
+            <option value="movie">Movie</option>
+            <option value="actor">Actor</option>
+            <option value="director">Director</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+</header>
+
+<div class="center-container">
+    <h1>404 - Page Not Found</h1>
+    <p>The resource you are looking for could not be found. Please try searching again or go back to the homepage.</p>
+    <a href="/home" class="back-button">Back to Home</a>
+</div>
+
+<footer>
+    <p>&copy; 2024 Movie Catalog</p>
+</footer>
 </body>
 </html>

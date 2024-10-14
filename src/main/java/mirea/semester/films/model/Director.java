@@ -8,9 +8,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "directors")
-@Data  // Автоматически добавляет геттеры, сеттеры, методы equals, hashCode и toString
-@NoArgsConstructor  // Автоматически создает конструктор без аргументов
-@AllArgsConstructor // Автоматически создает конструктор со всеми аргументами
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Director {

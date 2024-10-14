@@ -3,25 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${movie.title}">Movie Details</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+<header>
+    <!-- Поисковая строка -->
+    <form action="/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search..." required>
+        <select name="type">
+            <option value="movie">Movie</option>
+            <option value="actor">Actor</option>
+            <option value="director">Director</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+</header>
+
 <h1 th:text="${movie.title}">Movie Title</h1>
 
-<div>
-    <img th:src="@{${movie.posterUrl}}" alt="Movie Poster"/>
-    <p><strong>Description:</strong> <span th:text="${movie.description}">Description of the movie</span></p>
-    <p><strong>Release Date:</strong> <span th:text="${movie.releaseDate}">Release Date</span></p>
-    <p><strong>Duration:</strong> <span th:text="${movie.duration}">Duration</span> minutes</p>
-    <p><strong>Genres:</strong>
-        <span th:each="genre : ${movie.genres}" th:text="${genre}">Genre</span>
-    </p>
-    <p><strong>Actors:</strong>
-        <span th:each="actor : ${movie.actors}" th:text="${actor}">Actor</span>
-    </p>
-    <p><strong>Directors:</strong>
-        <span th:each="director : ${movie.directors}" th:text="${director}">Directors</span>
+<div class="content-container">
+    <div class="content-image">
+        <img th:src="@{${movie.posterUrl}}" alt="Movie Poster"/>
+    </div>
+    <div class="content-details">
+        <p><strong>Description:</strong> <span th:text="${movie.description}">Description of the movie</span></p>
+        <p><strong>Release Date:</strong> <span th:text="${movie.releaseDate}">Release Date</span></p>
+        <p><strong>Duration:</strong> <span th:text="${movie.duration}">Duration</span> minutes</p>
+
+        <p><strong>Genres:</strong>
+            <span th:each="genre, stat : ${movie.genres}">
+                <span th:text="${genre}"></span><span th:if="${!stat.last}">, </span>
+            </span>
+        </p>
+
+        <p><strong>Actors:</strong>
+            <span th:each="actor, stat : ${movie.actors}">
+                <span th:text="${actor}"></span><span th:if="${!stat.last}">, </span>
+            </span>
+        </p>
+
+        <p><strong>Directors:</strong>
+            <span th:each="director, stat : ${movie.directors}">
+                <span th:text="${director}"></span><span th:if="${!stat.last}">, </span>
+            </span>
+        </p>
+
+        <a href="/home" class="back-button">Back to movies</a>
+    </div>
 </div>
 
-<a href="/movies">Back to movies</a>
+<footer>
+    <p>&copy; 2024 Movie Catalog</p>
+</footer>
 </body>
 </html>

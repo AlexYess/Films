@@ -4,12 +4,16 @@ import mirea.semester.films.dto.MovieDto;
 import mirea.semester.films.mapper.ActorMapper;
 import mirea.semester.films.mapper.MovieMapper;
 import mirea.semester.films.model.Actor;
+import mirea.semester.films.model.Genre;
+import mirea.semester.films.model.Movie;
 import mirea.semester.films.service.ActorService;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Component
 public class ActorFacade {
 
@@ -26,7 +30,10 @@ public class ActorFacade {
         return actorService.getActorById(id)
                 .map(actor -> {
                     // Преобразуем фильмы актера в DTO
-                    List<MovieDto> movieDtos = movieMapper.toDtoList(actor.getMovies());
+                    List<String> movies = actor.getMovies().stream()
+                            .map(Movie::getTitle)
+                            .toList();
+
 
                     // Создаем ActorDto
                     return new ActorDto(
@@ -36,7 +43,7 @@ public class ActorFacade {
                             actor.getBirthDate(),
                             actor.getDeathDate(),
                             actor.getPhoto_url(),
-                            movieDtos
+                            movies
                     );
                 });
     }
@@ -47,7 +54,16 @@ public class ActorFacade {
         return actorMapper.toDtoList(actors);
     }
 
-    public Optional<Actor> getActorByName(String name) {
+    public Optional<ActorDto> getActorByName(String name) {
         return actorService.getActorByName(name);
+    }
+
+    public Actor saveActor(ActorDto actor) {
+        Actor newActor = actorMapper.toActor(actor);
+        return actorService.saveActor(newActor);
+    }
+
+    public void deleteActor(Long id) {
+        actorService.deleteActor(id);
     }
 }

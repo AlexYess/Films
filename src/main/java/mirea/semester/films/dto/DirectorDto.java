@@ -18,6 +18,6 @@ public class DirectorDto {
     private String bio;
     private String birthDate;
     private String deathDate;
-    private String photo_url;
-    private List<MovieDto> movies;
+    private String photoUrl;
+    private List<String> movies;
 }

@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <!-- Подключение внешнего CSS файла -->
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 
 <header>
-    <!-- Центрированная поисковая строка -->
-    <form action="/search" method="get">
+    <!-- Поисковая строка -->
+    <form action="/search" method="get" class="search-form">
         <input type="text" name="query" placeholder="Search..." required>
         <select name="type">
             <option value="movie">Movie</option>
@@ -19,6 +18,11 @@
         </select>
         <button type="submit">Search</button>
     </form>
+
+    <!-- Кнопка "Create a movie", отображается только для админов -->
+    <div class="create-movie-button" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <a href="/admin/dashboard" class="dashboard-link">Admin dashboard</a>
+    </div>
 </header>
 
 <main>
@@ -35,7 +39,7 @@
 </main>
 
 <footer>
-    <p>&copy; 2024 My Movie Website. All Rights Reserved.</p>
+    <p>&copy; 2024 Movie Catalog</p>
 </footer>
 
 </body>

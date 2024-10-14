@@ -38,6 +38,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Доступ к статическим ресурсам без авторизации
                         .requestMatchers("/login", "/register").permitAll()  // Разрешить доступ к этим страницам
                         .requestMatchers("/admin/**").hasRole("ADMIN")  // Доступ к запросам только для администраторов
                         .anyRequest().authenticated()  // Все остальные запросы требуют аутентификации

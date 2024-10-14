@@ -1,5 +1,7 @@
 package mirea.semester.films.controller;
 
+import mirea.semester.films.dto.ActorDto;
+import mirea.semester.films.dto.DirectorDto;
 import mirea.semester.films.dto.MovieDto;
 import mirea.semester.films.dto.user.UserDTORequest;
 import mirea.semester.films.facade.ActorFacade;
@@ -50,6 +52,11 @@ public class WebController {
         return "login";
     }
 
+    @GetMapping("/admin/dashboard")
+    public String showAdminDashboardPage() {
+        return "dashboard";
+    }
+
     @PostMapping("/login")
     public String login(String username, String password, Model model) {
         // Логика аутентификации пользователя
@@ -80,14 +87,14 @@ public class WebController {
                 }
                 break;
             case "actor":
-                Optional<Actor> actor = actorFacade.getActorByName(query);
+                Optional<ActorDto> actor = actorFacade.getActorByName(query);
                 if (actor.isPresent()) {
                     model.addAttribute("actor", actor.get());
                     return "actor-details"; // Шаблон для отображения актера
                 }
                 break;
             case "director":
-                Optional<Director> director = directorFacade.getDirectorByName(query);
+                Optional<DirectorDto> director = directorFacade.getDirectorByName(query);
                 if (director.isPresent()) {
                     model.addAttribute("director", director.get());
                     return "director-details"; // Шаблон для отображения режиссера
@@ -97,6 +104,22 @@ public class WebController {
         return "404"; // Возвращаем страницу 404, если ничего не найдено
     }
 
+    @GetMapping("admin/create-movie")
+    public String showCreateMovieForm(Model model) {
+        model.addAttribute("actors", actorFacade.getAllActors());
+        model.addAttribute("directors", directorFacade.getAllDirectors());
+        return "create-movie";
+    }
+
+    @GetMapping("admin/create-actor")
+    public String showCreateActorForm() {
+        return "create-actor";
+    }
+
+    @GetMapping("admin/create-director")
+    public String showCreateDirectorForm() {
+        return "create-director";
+    }
 
 }
 

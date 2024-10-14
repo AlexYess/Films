@@ -5,6 +5,7 @@ import mirea.semester.films.dto.MovieDto;
 import mirea.semester.films.mapper.DirectorMapper;
 import mirea.semester.films.mapper.MovieMapper;
 import mirea.semester.films.model.Director;
+import mirea.semester.films.model.Movie;
 import mirea.semester.films.service.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,8 +27,9 @@ public class DirectorFacade {
     public Optional<DirectorDto> getDirector(Long id) {
         return directorService.getDirectorById(id)
                 .map(director -> {
-                    List<MovieDto> movieDtos = movieMapper.toDtoList(director.getMovies());
-
+                    List<String> movies = director.getMovies().stream()
+                            .map(Movie::getTitle)
+                            .toList();
                     return new DirectorDto(
                             director.getId(),
                             director.getName(),
@@ -35,7 +37,7 @@ public class DirectorFacade {
                             director.getBirthDate(),
                             director.getDeathDate(),
                             director.getPhoto_url(),
-                            movieDtos
+                            movies
                     );
                 });
     }
@@ -44,7 +46,12 @@ public class DirectorFacade {
         return directorMapper.toDtoList(directorService.getAllDirectors());
     }
 
-    public Optional<Director> getDirectorByName(String name) {
+    public Optional<DirectorDto> getDirectorByName(String name) {
         return directorService.getDirectorByName(name);
+    }
+
+    public Director saveDirector(DirectorDto director) {
+        Director newDirector = directorMapper.toDirector(director);
+        return directorService.saveDirector(newDirector);
     }
 }

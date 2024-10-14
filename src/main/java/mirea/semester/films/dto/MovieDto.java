@@ -18,6 +18,4 @@ public class MovieDto {
     private List<String> actors;
     private int episodeCount;
     private String posterUrl;
-
-    // Конструкторы, геттеры, сеттеры
 }

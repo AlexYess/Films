@@ -1,6 +1,8 @@
 package mirea.semester.films.service;
 
 
+import mirea.semester.films.dto.ActorDto;
+import mirea.semester.films.mapper.ActorMapper;
 import mirea.semester.films.model.Actor;
 import mirea.semester.films.repository.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class ActorService {
 
     @Autowired
     private ActorRepository actorRepository;
+    @Autowired
+    private ActorMapper actorMapper;
 
     public List<Actor> getAllActors() {
         return actorRepository.findAll();
@@ -31,7 +35,7 @@ public class ActorService {
         actorRepository.deleteById(id);
     }
 
-    public Optional<Actor> getActorByName(String name) {
-        return actorRepository.findByName(name);
+    public Optional<ActorDto> getActorByName(String name) {
+        return actorRepository.findByName(name).map(actorMapper::toDto);
     }
 }

@@ -1,6 +1,9 @@
 package mirea.semester.films.service;
 
 
+import mirea.semester.films.dto.DirectorDto;
+import mirea.semester.films.mapper.DirectorMapper;
+import mirea.semester.films.mapper.MovieMapper;
 import mirea.semester.films.model.Director;
 import mirea.semester.films.repository.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ public class DirectorService {
 
     @Autowired
     private DirectorRepository directorRepository;
+
+    @Autowired
+    private DirectorMapper directorMapper;
 
     public List<Director> getAllDirectors() {
         return directorRepository.findAll();
@@ -31,7 +37,7 @@ public class DirectorService {
         directorRepository.deleteById(id);
     }
 
-    public Optional<Director> getDirectorByName(String name) {
-        return directorRepository.getDirectorsByName(name);
+    public Optional<DirectorDto> getDirectorByName(String name) {
+        return directorRepository.getDirectorsByName(name).map(directorMapper::toDto);
     }
 }

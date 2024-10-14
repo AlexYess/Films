@@ -35,9 +35,9 @@ public class MovieController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/admin")
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
-        Movie savedMovie = movieService.saveMovie(movie);
+    @PostMapping("/admin/create-movie")
+    public ResponseEntity<Movie> createMovie(@RequestBody MovieDto movie) {
+        Movie savedMovie = movieFacade.createMovie(movie);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
     }
 

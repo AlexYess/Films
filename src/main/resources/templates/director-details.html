@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${director.name}">Director Details</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <!-- Поисковая строка -->
+    <form action="/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search..." required>
+        <select name="type">
+            <option value="movie">Movie</option>
+            <option value="actor">Actor</option>
+            <option value="director">Director</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+</header>
+
+<h1 th:text="${director.name}">Director Name</h1>
+
+<div class="content-container">
+    <div class="content-image">
+        <img th:src="@{${director.photoUrl}}" alt="Director Photo"/>
+    </div>
+    <div class="content-details">
+        <p><strong>Biography:</strong> <span th:text="${director.bio}">Director Biography</span></p>
+        <p><strong>Birth Date:</strong> <span th:text="${director.birthDate}">Birth Date</span></p>
+        <p th:if="${director.deathDate != '-1'}"><strong>Death Date:</strong> <span th:text="${director.deathDate}">Death Date</span></p>
+
+        <p><strong>Movies:</strong>
+            <span th:each="movie, stat : ${director.movies}">
+                <span th:text="${movie}"></span><span th:if="${!stat.last}">, </span>
+            </span>
+        </p>
+
+        <a href="/home" class="back-button">Back to home</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Movie Catalog</p>
+</footer>
+</body>
+</html>

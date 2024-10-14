@@ -36,8 +36,8 @@ public class DirectorController {
     }
 
     @PostMapping
-    public ResponseEntity<Director> createDirector(@RequestBody Director director) {
-        Director savedDirector = directorService.saveDirector(director);
+    public ResponseEntity<Director> createDirector(@RequestBody DirectorDto director) {
+        Director savedDirector = directorFacade.saveDirector(director);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDirector);
     }
 
