@@ -2,46 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${director.name}">Director Details</title>
+    <title th:text="${director.name}">Детали режиссёра</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 <header>
     <!-- Поисковая строка -->
     <form action="/search" method="get" class="search-form">
-        <input type="text" name="query" placeholder="Search..." required>
+        <input type="text" name="query" placeholder="Поиск..." required>
         <select name="type">
-            <option value="movie">Movie</option>
-            <option value="actor">Actor</option>
-            <option value="director">Director</option>
+            <option value="movie">Фильм</option>
+            <option value="actor">Актёр</option>
+            <option value="director">Режиссёр</option>
         </select>
-        <button type="submit">Search</button>
+        <button type="submit">Искать</button>
     </form>
 </header>
 
-<h1 th:text="${director.name}">Director Name</h1>
+<h1 th:text="${director.name}">Имя режиссёра</h1>
 
 <div class="content-container">
     <div class="content-image">
-        <img th:src="@{${director.photoUrl}}" alt="Director Photo"/>
+        <img th:src="@{${director.photoUrl}}" alt="Фото режиссёра"/>
     </div>
     <div class="content-details">
-        <p><strong>Biography:</strong> <span th:text="${director.bio}">Director Biography</span></p>
-        <p><strong>Birth Date:</strong> <span th:text="${director.birthDate}">Birth Date</span></p>
-        <p th:if="${director.deathDate != '-1'}"><strong>Death Date:</strong> <span th:text="${director.deathDate}">Death Date</span></p>
+        <p><strong>Биография:</strong> <span th:text="${director.bio}">Биография режиссёра</span></p>
+        <p><strong>Дата рождения:</strong> <span th:text="${director.birthDate}">Дата рождения</span></p>
+        <p th:if="${director.deathDate != '-1'}"><strong>Дата смерти:</strong> <span th:text="${director.deathDate}">Дата смерти</span></p>
 
-        <p><strong>Movies:</strong>
+        <p><strong>Фильмы:</strong>
             <span th:each="movie, stat : ${director.movies}">
                 <span th:text="${movie}"></span><span th:if="${!stat.last}">, </span>
             </span>
         </p>
 
-        <a href="/home" class="back-button">Back to home</a>
+        <a href="/home" class="back-button">Назад на главную</a>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2024 Movie Catalog</p>
+    <p>&copy; 2024 Каталог фильмов</p>
 </footer>
 </body>
 </html>

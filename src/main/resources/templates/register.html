@@ -2,28 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<h1>Registration</h1>
-<form action="/register" method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRF токен -->
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+
+<header>
+    <!-- Здесь может быть ваша навигация -->
+</header>
+
+<main class="main-content">
+    <div class="center-container">
+        <h1>Регистрация</h1>
+
+        <form action="/register" method="post" class="create-movie-form">
+            <!-- CSRF токен -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+            <div class="form-group">
+                <label for="username">Имя пользователя: </label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Почта:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="submit-button">Зарегистрироваться</button>
+        </form>
+
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}">Error message</p>
+        </div>
     </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit">Register</button>
-</form>
-<div th:if="${error}">
-    <p th:text="${error}">Error message</p>
-</div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Movie Catalog</p>
+</footer>
+
+<script>
+    const emailInput = document.getElementById('email');
+
+    emailInput.addEventListener('input', function() {
+        if (emailInput.validity.typeMismatch) {
+            emailInput.setCustomValidity("Пожалуйста, введите корректный адрес электронной почты. Пример: user@example.com");
+        } else {
+            emailInput.setCustomValidity("");
+        }
+    });
+</script>
+
 </body>
 </html>

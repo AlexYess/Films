@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Панель администратора</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
@@ -10,29 +10,29 @@
 <header>
     <!-- Поисковая строка -->
     <form action="/search" method="get" class="search-form">
-        <input type="text" name="query" placeholder="Search..." required>
+        <input type="text" name="query" placeholder="Поиск..." required>
         <select name="type">
-            <option value="movie">Movie</option>
-            <option value="actor">Actor</option>
-            <option value="director">Director</option>
+            <option value="movie">Фильм</option>
+            <option value="actor">Актёр</option>
+            <option value="director">Режиссёр</option>
         </select>
-        <button type="submit">Search</button>
+        <button type="submit">Искать</button>
     </form>
 </header>
 
 <div class="content-wrap">
     <div class="main-content">
-        <h1>Admin Dashboard</h1>
+        <h1>Панель администратора</h1>
 
         <div class="dashboard-buttons">
-            <a href="/admin/create-movie" class="dashboard-button">Create Movie</a>
-            <a href="/admin/create-actor" class="dashboard-button">Create Actor</a>
-            <a href="/admin/create-director" class="dashboard-button">Create Director</a>
+            <a href="/admin/create-movie" class="dashboard-button">Создать фильм</a>
+            <a href="/admin/create-actor" class="dashboard-button">Создать актёра</a>
+            <a href="/admin/create-director" class="dashboard-button">Создать режиссёра</a>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Movie Catalog</p>
+        <p>&copy; 2024 Каталог фильмов</p>
     </footer>
 </div>
 

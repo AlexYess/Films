@@ -17,7 +17,7 @@ def generate_description():
         return jsonify({"error": "Title is required"}), 400
 
     # # Генерация описания фильма с использованием Cohere
-    prompt = (f"Вы писатель, делающий описание для сайта кинотеатра. Ваша задача — создать уникальное "
+    prompt = (f"Вы писатель, создающий описание для сайта кинотеатра. Ваша задача — создать уникальное "
               f"описание фильма '{title}'. Используйте не более 500 символов.")
     response = co.chat(message=prompt)
     description = response.text.strip()

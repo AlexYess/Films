@@ -2,31 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>404 Not Found</title>
+    <title>404 Не найдено</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 <header>
-    <!-- Поисковая строка -->
     <form action="/search" method="get" class="search-form">
-        <input type="text" name="query" placeholder="Search..." required>
+        <input type="text" name="query" placeholder="Поиск..." required>
         <select name="type">
-            <option value="movie">Movie</option>
-            <option value="actor">Actor</option>
-            <option value="director">Director</option>
+            <option value="movie">Фильм</option>
+            <option value="actor">Актёр</option>
+            <option value="director">Режиссёр</option>
         </select>
-        <button type="submit">Search</button>
+        <button type="submit">Искать</button>
     </form>
 </header>
 
 <div class="center-container">
-    <h1>404 - Page Not Found</h1>
-    <p>The resource you are looking for could not be found. Please try searching again or go back to the homepage.</p>
-    <a href="/home" class="back-button">Back to Home</a>
+    <h1>404 - Страница не найдена</h1>
+    <p>Ресурс, который вы ищете, не найден. Попробуйте выполнить поиск еще раз или вернитесь на главную страницу.</p>
+    <a href="/home" class="back-button">Вернуться на главную</a>
 </div>
 
 <footer>
-    <p>&copy; 2024 Movie Catalog</p>
+    <p>&copy; 2024 Каталог фильмов</p>
 </footer>
 </body>
 </html>

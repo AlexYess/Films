@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Movie</title>
+    <title>Создать фильм</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
@@ -10,59 +10,59 @@
 <header>
     <!-- Поисковая строка -->
     <form action="/search" method="get" class="search-form">
-        <input type="text" name="query" placeholder="Search..." required>
+        <input type="text" name="query" placeholder="Поиск..." required>
         <select name="type">
-            <option value="movie">Movie</option>
-            <option value="actor">Actor</option>
-            <option value="director">Director</option>
+            <option value="movie">Фильм</option>
+            <option value="actor">Актёр</option>
+            <option value="director">Режиссёр</option>
         </select>
-        <button type="submit">Search</button>
+        <button type="submit">Искать</button>
     </form>
 </header>
 
-<h1>Create Movie</h1>
+<h1>Создать фильм</h1>
 
 <form id="createMovieForm" class="create-movie-form">
     <!-- CSRF токен -->
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
     <div class="form-group">
-        <label for="title">Title:</label>
+        <label for="title">Название:</label>
         <input type="text" id="title" name="title" required oninput="setPosterUrl()">
     </div>
 
     <div class="form-group">
-        <label for="releaseDate">Release Date:</label>
+        <label for="releaseDate">Дата выхода:</label>
         <input type="date" id="releaseDate" name="releaseDate" required>
     </div>
 
     <div class="form-group">
-        <label for="duration">Duration (minutes):</label>
+        <label for="duration">Продолжительность (в минутах):</label>
         <input type="number" id="duration" name="duration" required>
     </div>
 
     <div class="form-group">
-        <label for="genres">Genres (comma-separated IDs):</label>
+        <label for="genres">Жанры (ID, через запятую):</label>
         <input type="text" id="genres" name="genres" required>
     </div>
 
     <div class="form-group">
-        <label for="directors">Directors (comma-separated IDs):</label>
+        <label for="directors">Режиссёры (ID, через запятую):</label>
         <input type="text" id="directors" name="directors" required>
     </div>
 
     <div class="form-group">
-        <label for="actors">Actors (comma-separated IDs):</label>
+        <label for="actors">Актёры (ID, через запятую):</label>
         <input type="text" id="actors" name="actors" required>
     </div>
 
     <!-- Добавляем поле для posterUrl -->
     <div class="form-group">
-        <label for="posterUrl">Poster URL:</label>
+        <label for="posterUrl">URL постера:</label>
         <input type="text" id="posterUrl" name="posterUrl" readonly>
     </div>
 
-    <button type="submit" class="submit-button">Create Movie</button>
+    <button type="submit" class="submit-button">Создать фильм</button>
 </form>
 
 <script>
@@ -89,13 +89,13 @@
         })
             .then(response => {
                 if (response.ok) {
-                    alert('Movie created successfully!');
+                    alert('Фильм успешно создан!');
                 } else {
-                    alert('Error creating movie.');
+                    alert('Ошибка при создании фильма.');
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Ошибка:', error);
             });
     });
 
@@ -107,14 +107,14 @@
     }
 </script>
 
-<!-- Таблицы актеров и режиссеров с прокруткой -->
-<h2>Actors</h2>
+<!-- Таблицы актёров и режиссёров с прокруткой -->
+<h2>Актёры</h2>
 <div class="table-container">
     <table>
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Имя</th>
         </tr>
         </thead>
         <tbody>
@@ -126,13 +126,13 @@
     </table>
 </div>
 
-<h2>Directors</h2>
+<h2>Режиссёры</h2>
 <div class="table-container">
     <table>
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Имя</th>
         </tr>
         </thead>
         <tbody>
@@ -145,7 +145,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2024 Movie Catalog</p>
+    <p>&copy; 2024 Каталог фильмов</p>
 </footer>
 
 </body>
